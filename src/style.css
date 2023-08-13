@@ -37,6 +37,39 @@ ul {
   font-size: 24px;
 }
 
+/* Sidebar */
+
+.sidebar {
+  background-color: black;
+  width: 117px;
+  height: calc(100vh - 97px);
+}
+
+.sidebar ul {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  list-style: none;
+}
+
+.sidebar ul li {
+  width: 64px;
+  height: 64px;
+}
+
+.sidebar p {
+  position: absolute;
+  color: white;
+  transform: rotate(-90deg);
+  font-family: Roboto;
+  font-size: 12px;
+  bottom: 100px;
+  width: 150px;
+}
+
 @media screen and (max-width: 1000px) {
   .header-container ul {
     margin: 0 50px;
@@ -45,6 +78,22 @@ ul {
 
 @media screen and (max-width: 768px) {
   .header-container ul {
+    display: none;
+  }
+
+  .sidebar {
+    width: 100%;
+    height: initial;
+    padding: 18px;
+    position: absolute;
+    bottom: 0;
+  }
+
+  .sidebar ul {
+    flex-direction: row-reverse;
+    align-items: flex-end;
+  }
+  .sidebar p {
     display: none;
   }
 }

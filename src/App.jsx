@@ -7,7 +7,7 @@ import './style.css';
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: '/:id',
     element: <Home />,
   },
 ]);

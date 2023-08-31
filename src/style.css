@@ -8,12 +8,24 @@ ul {
   padding: 0;
 }
 
+/* stylelint-disable-next-line selector-class-pattern */
+.App {
+  display: grid;
+  grid-template-areas:
+    'header header'
+    'sidebar page';
+  grid-template-columns: 117px 1fr;
+  grid-template-rows: 97px 1fr;
+  min-height: 100vh;
+}
+
 /* Header */
 
 .header {
   background-color: black;
   padding: 18px;
-  font-family: Roboto;
+  font-family: Roboto, sans-serif;
+  grid-area: header;
 }
 
 .header-container {
@@ -31,6 +43,7 @@ ul {
   width: 100%;
   margin: 0 150px;
 }
+
 .header-container ul a {
   color: white;
   text-decoration: none;
@@ -43,6 +56,7 @@ ul {
   background-color: black;
   width: 117px;
   height: calc(100vh - 97px);
+  grid-area: sidebar;
 }
 
 .sidebar ul {
@@ -64,19 +78,68 @@ ul {
   position: absolute;
   color: white;
   transform: rotate(-90deg);
-  font-family: Roboto;
+  font-family: Roboto, sans-serif;
   font-size: 12px;
   bottom: 100px;
   width: 150px;
 }
 
-@media screen and (max-width: 1000px) {
+/* Page */
+
+.page-container {
+  font-family: Roboto, sans-serif;
+  color: black;
+  margin: 68px 90px 86px 107px;
+}
+
+.page-infos {
+  grid-area: paragraph;
+}
+
+.page-infos h1 {
+  font-size: 48px;
+}
+
+.page-infos span {
+  font-size: 48px;
+  color: #ff0101;
+}
+
+/* Nutriment */
+
+.nutriment-container {
+  display: flex;
+  align-items: center;
+  font-family: Roboto, sans-serif;
+}
+
+.nutriment-icon {
+  border-radius: 5px;
+  background: #fbfbfb;
+  box-shadow: 0 2px 4px 0 rgb(0 0 0 / 2%);
+  margin: 32px 0 32px 32px;
+}
+
+.nutriment-content {
+  margin-left: 24px;
+}
+
+.nutriment-value {
+  font-size: 20px;
+  margin: 0;
+}
+
+.nutriment-name {
+  font-size: 14px;
+}
+
+@media screen and (width <= 1000px) {
   .header-container ul {
     margin: 0 50px;
   }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (width <= 768px) {
   .header-container ul {
     display: none;
   }
@@ -85,15 +148,24 @@ ul {
     width: 100%;
     height: initial;
     padding: 18px;
-    position: absolute;
-    bottom: 0;
   }
 
   .sidebar ul {
     flex-direction: row-reverse;
     align-items: flex-end;
   }
+
   .sidebar p {
     display: none;
+  }
+
+  /* stylelint-disable-next-line selector-class-pattern */
+  .App {
+    grid-template-rows: 97px 1fr 100px;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      'header'
+      'page'
+      'sidebar';
   }
 }

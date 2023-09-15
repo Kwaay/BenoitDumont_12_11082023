@@ -6,19 +6,23 @@ import UserService from '../../services/User';
 import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
 import Nutriment from '../components/Nutriment';
+import RBarChart from '../components/RadialBarChart';
+import RadarChart from '../components/RadarChart';
 
 export default function Home() {
   const { id } = useParams();
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState({});
+  // const [userSessions, setUserSessions] = useState(null);
 
   useEffect(() => {
-    async function fetchUser() {
-      UserService.getOne(id).then((res) => {
-        console.log(res.data);
-        setUser(res.data);
-      });
+    async function fetchUserData() {
+      const userInfos = await UserService.getOne(id);
+
+      const userPerformances = await UserService.getPerformances(id);
+      userInfos.performances = userPerformances;
+      setUser(userInfos);
     }
-    fetchUser();
+    fetchUserData();
   }, [id]);
 
   return (
@@ -34,7 +38,13 @@ export default function Home() {
         </div>
         <div className="page-datas">
           <div className="page-graph">
-            <p>Graph</p>
+            <div className="radar-chart">
+              <RadarChart data={user?.performances}></RadarChart>
+            </div>
+            <div className="radial-bar">
+              <h3>Score</h3>
+              <RBarChart todayScore={user?.todayScore}></RBarChart>
+            </div>
           </div>
           <div className="page-nutriments">
             <Nutriment

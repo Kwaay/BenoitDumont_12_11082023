@@ -105,6 +105,11 @@ ul {
   color: #ff0101;
 }
 
+.page-datas {
+  display: flex;
+  flex-direction: row;
+}
+
 /* Nutriment */
 
 .nutriment-container {
@@ -131,6 +136,25 @@ ul {
 
 .nutriment-name {
   font-size: 14px;
+}
+
+/* BarChart */
+.percent {
+  font-size: 26px;
+  font-weight: 700;
+}
+
+.percent-text {
+  font-size: 16px;
+  width: 95px;
+}
+
+.radar-chart {
+  background-color: #282d30;
+}
+
+.score-chart path {
+  stroke-linecap: round;
 }
 
 @media screen and (width <= 1000px) {

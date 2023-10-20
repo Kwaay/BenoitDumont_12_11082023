@@ -3,7 +3,8 @@
 }
 
 body,
-ul {
+ul,
+p {
   margin: 0;
   padding: 0;
 }
@@ -11,10 +12,9 @@ ul {
 /* stylelint-disable-next-line selector-class-pattern */
 .App {
   display: grid;
-  grid-template-areas:
-    'header header'
-    'sidebar page';
-  grid-template-columns: 117px 1fr;
+  grid-template:
+    'header header' 117px
+    'sidebar page' 1fr;
   grid-template-rows: 97px 1fr;
   min-height: 100vh;
 }
@@ -106,16 +106,28 @@ ul {
 }
 
 .page-datas {
-  display: flex;
-  flex-direction: row;
+  display: grid;
+  grid-template:
+    'activity activity activity nutrients' 320px
+    'duration performance score nutrients' 260px;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 60px;
 }
 
 /* Nutriment */
+
+.nutrients {
+  grid-area: nutrients;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
 
 .nutriment-container {
   display: flex;
   align-items: center;
   font-family: Roboto, sans-serif;
+  background: #fbfbfb;
 }
 
 .nutriment-icon {
@@ -139,6 +151,14 @@ ul {
 }
 
 /* BarChart */
+
+.percent-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
 .percent {
   font-size: 26px;
   font-weight: 700;
@@ -146,15 +166,126 @@ ul {
 
 .percent-text {
   font-size: 16px;
-  width: 95px;
+  color: #74798c;
+}
+
+.radial-bar foreignObject {
+  overflow: visible;
+  text-align: center;
+  position: relative;
 }
 
 .radar-chart {
   background-color: #282d30;
+  width: 100%;
+  aspect-ratio: 1/1;
+  border-radius: 5px;
+  grid-area: performance;
+}
+
+.radar-chart > .recharts-wrapper svg {
+  overflow: visible;
+}
+
+.radar-chart > .recharts-wrapper tspan {
+  font-family: Roboto, sans-serif;
+  font-size: 12px;
+  font-style: normal;
+  fill: #fff;
+  gap: 5px;
+}
+
+.radial-bar {
+  width: 100%;
+  aspect-ratio: 1/1;
+  overflow: visible;
+  border-radius: 5px;
+  grid-area: score;
+  position: relative;
+}
+
+.radial-bar h3 {
+  font-weight: 500;
+  font-size: 15px;
+  position: absolute;
+  top: 24px;
+  left: 30px;
+}
+
+.radial-bar textPath {
+  visibility: hidden;
+}
+
+.biaxial-bar-chart {
+  padding-bottom: 30px;
+  grid-area: activity;
+}
+
+.biaxial-bar-chart > .recharts-wrapper > svg {
+  margin: 0 -55px;
 }
 
 .score-chart path {
   stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.legend-content {
+  color: #74798c;
+  font-family: Roboto, sans-serif;
+  font-weight: 500;
+}
+
+.legend-content:first-of-type::before {
+  content: '';
+  background-color: black;
+  width: 8px;
+  height: 8px;
+  display: inline-block;
+  margin-right: 12px;
+  border-radius: 50%;
+}
+
+.legend-content:last-of-type::before {
+  content: '';
+  background-color: #ff0101;
+  width: 8px;
+  height: 8px;
+  display: inline-block;
+  margin-right: 12px;
+  border-radius: 50%;
+}
+
+.line-container {
+  margin-top: auto;
+  margin-bottom: 0;
+}
+
+.line-chart {
+  width: 100%;
+  aspect-ratio: 1/1;
+  background: #ff0101;
+  padding: 16px 0;
+  border-radius: 5px;
+  grid-area: duration;
+  position: relative;
+  display: flex;
+}
+
+.line-chart h3 {
+  font-size: 15px;
+  opacity: 0.504;
+  color: #fff;
+  font-weight: 500;
+  position: absolute;
+  top: 29px;
+  left: 34px;
+}
+
+.line-chart .recharts-cartesian-axis-tick-value {
+  fill: #fff;
+  font-size: 12px;
+  opacity: 0.5;
 }
 
 @media screen and (width <= 1000px) {
@@ -185,11 +316,10 @@ ul {
 
   /* stylelint-disable-next-line selector-class-pattern */
   .App {
-    grid-template-rows: 97px 1fr 100px;
+    grid-template:
+      'header' 97px
+      'page' 1fr
+      'sidebar' 100px;
     grid-template-columns: 1fr;
-    grid-template-areas:
-      'header'
-      'page'
-      'sidebar';
   }
 }

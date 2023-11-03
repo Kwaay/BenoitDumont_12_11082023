@@ -15,7 +15,7 @@ export default function BiaxialBarChart({ data }) {
     day: a.day.split('0')[4],
   }));
   return (
-    <ResponsiveContainer>
+    <ResponsiveContainer width="100%" height="100%">
       <BarChart
         data={formattedDay}
         margin={{
@@ -76,7 +76,7 @@ export default function BiaxialBarChart({ data }) {
             justifyContent: 'flex-end',
             gap: '32px',
             right: '35px',
-            top: '-55px',
+            top: '10px',
           }}
         ></Legend>
         <Tooltip

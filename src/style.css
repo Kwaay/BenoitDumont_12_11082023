@@ -16,7 +16,7 @@ p {
     'header header' 117px
     'sidebar page' 1fr;
   grid-template-rows: 97px 1fr;
-  min-height: 100vh;
+  height: 100vh;
 }
 
 /* Header */
@@ -89,11 +89,14 @@ p {
 .page-container {
   font-family: Roboto, sans-serif;
   color: black;
-  margin: 68px 90px 86px 107px;
+  padding: 68px 90px 86px 107px;
+  height: calc(100vh - 97px);
+  overflow-y: scroll;
 }
 
 .page-infos {
   grid-area: paragraph;
+  padding-bottom: 77px;
 }
 
 .page-infos h1 {
@@ -110,8 +113,8 @@ p {
   grid-template:
     'activity activity activity nutrients' 320px
     'duration performance score nutrients' 260px;
-  grid-template-columns: repeat(4, 1fr);
-  grid-gap: 60px;
+  grid-template-columns: repeat(3, 1fr) minmax(258px, 350px);
+  grid-gap: 30px;
 }
 
 /* Nutriment */
@@ -119,12 +122,14 @@ p {
 .nutrients {
   grid-area: nutrients;
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
   justify-content: space-between;
 }
 
 .nutriment-container {
   display: flex;
+  flex-grow: 1;
+  min-width: 200px;
   align-items: center;
   font-family: Roboto, sans-serif;
   background: #fbfbfb;
@@ -217,8 +222,14 @@ p {
 }
 
 .biaxial-bar-chart {
-  padding-bottom: 30px;
   grid-area: activity;
+  background: #fbfbfb;
+  position: relative;
+}
+
+.biaxial-bar-chart h3 {
+  margin: 24px 0 0 32px;
+  position: absolute;
 }
 
 .biaxial-bar-chart > .recharts-wrapper > svg {
@@ -288,6 +299,37 @@ p {
   opacity: 0.5;
 }
 
+@media screen and (width <= 1400px) {
+  .page-datas {
+    display: grid;
+    grid-template:
+      'nutrients nutrients nutrients' 1fr
+      'activity activity activity' 320px
+      'duration performance score' 260px;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 30px;
+  }
+}
+
+@media screen and (width <= 1200px) {
+  .page-datas {
+    display: grid;
+    grid-template:
+      'activity activity' 320px
+      'duration nutrients' 260px
+      'performance nutrients' 260px
+      'score nutrients' 260px;
+    grid-template-columns: 350px 350px;
+    grid-gap: 30px;
+  }
+
+  .line-chart,
+  .radar-chart,
+  .radial-bar {
+    aspect-ratio: unset;
+  }
+}
+
 @media screen and (width <= 1000px) {
   .header-container ul {
     margin: 0 50px;
@@ -303,6 +345,9 @@ p {
     width: 100%;
     height: initial;
     padding: 18px;
+    position: fixed;
+    bottom: 0;
+    z-index: 999;
   }
 
   .sidebar ul {
@@ -321,5 +366,22 @@ p {
       'page' 1fr
       'sidebar' 100px;
     grid-template-columns: 1fr;
+  }
+
+  .page-container {
+    height: auto;
+    padding: 50px;
+  }
+
+  .page-datas {
+    display: grid;
+    grid-template:
+      'activity ' 250px
+      'duration' 250px
+      'performance' 250px
+      'score' 250px
+      'nutrients';
+    grid-template-columns: 1fr;
+    grid-gap: 30px;
   }
 }
